@@ -1,15 +1,12 @@
 import { Text, View } from "react-native";
+import styles from "../Apple.style";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <>
+      <View style={styles.body}>
+        <Text>Body</Text>
+      </View>
+    </>
   );
 }
