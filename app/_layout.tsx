@@ -1,23 +1,15 @@
+import { HeaderTitle } from "@/components/HeaderTitle/HeaderTitle";
 import { Stack } from "expo-router";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-const HeaderTitle = () => (
-  <View style={styles.headerContainer}>
-    <Image
-      style={styles.headerLogo}
-      source={require("../assets/images/logoToDo.png")}
-      resizeMode="contain"
-    />
-    <Text style={styles.headerText}>Tu as probablement des trucs à faire</Text>
-  </View>
-);
+
 
 export default function RootLayout() {
   return (
     <>
       <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1, backgroundColor: "F9F9F9" }}>
+        <SafeAreaView style={styles.app}>
           <Stack
             screenOptions={{
               headerTitle: () => <HeaderTitle />,
@@ -36,21 +28,13 @@ export default function RootLayout() {
 }
 
 export const styles = StyleSheet.create({
-  headerContainer: {
-    alignItems: "flex-start",
-    justifyContent: "center",
-  },
-  headerLogo: {
-    width: 80,
-    height: 60,
-  },
-  headerText: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: "#707070",
-    marginTop: 5,
+  app: {
+    flex: 1,
+    backgroundColor: "#F9F9F9",
+    
   },
   footer: {
     height: 80,
+    padding:10
   },
 });
