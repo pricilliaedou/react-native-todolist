@@ -41,7 +41,7 @@ const upadatedTodo = {
   ...todo,
   completed: !todo.completed
 }
-const indexToUpdate = todoList.findIndex(()=>todo.id === upadatedTodo.id);
+const indexToUpdate = todoList.findIndex((t) => t.id === todo.id);
 
 const updatedTodoList = [...todoList];
 updatedTodoList[indexToUpdate] = upadatedTodo;
