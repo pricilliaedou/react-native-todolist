@@ -18,7 +18,7 @@ export default function TabBottomMenu({
   return (
     <View style={styles.container}>
       <TouchableOpacity>
-        <Text style={getTextStyle()}>All</Text>
+        <Text>All</Text>
       </TouchableOpacity>
       <TouchableOpacity>
         <Text>In progress</Text>
