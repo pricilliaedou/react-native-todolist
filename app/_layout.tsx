@@ -1,11 +1,12 @@
 import { HeaderTitle } from "@/components/HeaderTitle/HeaderTitle";
+import TabBottomMenu from "@/components/TabBottomMenu/TabBottomMenu ";
 import { Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-
-
 export default function RootLayout() {
+  const [selectedTabName, setSelectedTabName] = useState("All");
   return (
     <>
       <SafeAreaProvider>
@@ -21,7 +22,7 @@ export default function RootLayout() {
         </SafeAreaView>
       </SafeAreaProvider>
       <View style={styles.footer}>
-        <Text>Je suis le footer</Text>
+        <TabBottomMenu selectedTabName={selectedTabName} />
       </View>
     </>
   );
@@ -31,10 +32,9 @@ export const styles = StyleSheet.create({
   app: {
     flex: 1,
     backgroundColor: "#F9F9F9",
-    
   },
   footer: {
     height: 80,
-    padding:10
+    padding: 10,
   },
 });
