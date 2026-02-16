@@ -22,7 +22,10 @@ export default function RootLayout() {
         </SafeAreaView>
       </SafeAreaProvider>
       <View style={styles.footer}>
-        <TabBottomMenu selectedTabName={selectedTabName} />
+        <TabBottomMenu
+          onPress={setSelectedTabName}
+          selectedTabName={selectedTabName}
+        />
       </View>
     </>
   );
@@ -34,7 +37,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#F9F9F9",
   },
   footer: {
-    height: 80,
+    height: 70,
     padding: 10,
   },
 });
