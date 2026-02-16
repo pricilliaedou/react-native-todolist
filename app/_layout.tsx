@@ -1,12 +1,12 @@
 import { HeaderTitle } from "@/components/HeaderTitle/HeaderTitle";
 import TabBottomMenu from "@/components/TabBottomMenu/TabBottomMenu ";
+import { useSelectedTab } from "@/stores/todoStore";
 import { Stack } from "expo-router";
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
-  const [selectedTabName, setSelectedTabName] = useState("All");
+  const { selectedTabName, setSelectedTabName } = useSelectedTab();
   return (
     <>
       <SafeAreaProvider>

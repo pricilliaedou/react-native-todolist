@@ -1,43 +1,11 @@
 import { CardToDo, Todo } from "@/components/CardToDo/CardToDo";
-import { useState } from "react";
+import { getFilteredList, useSelectedTab, useTodoList } from "@/stores/todoStore";
 import { ScrollView, View } from "react-native";
 import styles from "../Apple.style";
 
-const todo_List = [
-  {
-    id: "1",
-    title: "Sortir le chien",
-    completed: true,
-  },
-  {
-    id: "2",
-    title: "Faire les courses",
-    completed: false,
-  },
-  {
-    id: "3",
-    title: "Répondre aux emails",
-    completed: false,
-  },
-  {
-    id: "4",
-    title: "Sortir le chien",
-    completed: true,
-  },
-  {
-    id: "5",
-    title: "Faire les courses",
-    completed: true,
-  },
-  {
-    id: "6",
-    title: "Répondre aux emails",
-    completed: true,
-  },
-];
-
 export default function Index() {
-  const [todoList, setTodoList] = useState(todo_List);
+  const { todoList, setTodoList } = useTodoList();
+  const { selectedTabName } = useSelectedTab();
 
   function updateTodo(todo: Todo) {
     const upadatedTodo = {
@@ -54,7 +22,7 @@ export default function Index() {
   return (
     <View style={styles.body}>
       <ScrollView>
-        {todoList.map((todo) => (
+        {getFilteredList(todoList, selectedTabName).map((todo) => (
           <CardToDo key={todo.id} todo={todo} onPress={updateTodo} />
         ))}
       </ScrollView>
