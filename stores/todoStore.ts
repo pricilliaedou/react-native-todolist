@@ -1,41 +1,8 @@
 import { Todo } from "@/components/CardToDo/CardToDo";
 import { useEffect, useState } from "react";
 
-const todo_List: Todo[] = [
-  {
-    id: "1",
-    title: "Sortir le chien",
-    completed: true,
-  },
-  {
-    id: "2",
-    title: "Faire les courses",
-    completed: false,
-  },
-  {
-    id: "3",
-    title: "Répondre aux emails",
-    completed: false,
-  },
-  {
-    id: "4",
-    title: "Sortir le chien",
-    completed: true,
-  },
-  {
-    id: "5",
-    title: "Faire les courses",
-    completed: true,
-  },
-  {
-    id: "6",
-    title: "Répondre aux emails",
-    completed: true,
-  },
-];
-
 // Store global partagé
-let globalTodoList: Todo[] = todo_List;
+let globalTodoList: Todo[] = [];
 let globalSelectedTabName: string = "All";
 const todoListeners: Set<(todos: Todo[]) => void> = new Set();
 const tabListeners: Set<(tab: string) => void> = new Set();
