@@ -77,7 +77,9 @@ export const styles = StyleSheet.create({
     backgroundColor: "#F9F9F9",
   },
   footer: {
-    height: 70,
+    height: 100,
     padding: 10,
+    backgroundColor: "#fff",
+    justifyContent: "center",
   },
 });
