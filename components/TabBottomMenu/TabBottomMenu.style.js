@@ -2,8 +2,11 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
+    height: 80,
+    backgroundColor: "pink",
     flexDirection: "row",
     justifyContent: "space-evenly",
+    alignItems: "center",
     // paddingVertical: 20, à voir
     shadowColor: "#000",
     shadowOffset: {

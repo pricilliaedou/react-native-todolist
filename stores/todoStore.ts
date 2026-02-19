@@ -1,16 +1,55 @@
 import { Todo } from "@/components/CardToDo/CardToDo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 
-// Store global partagé
 let globalTodoList: Todo[] = [];
 let globalSelectedTabName: string = "All";
 const todoListeners: Set<(todos: Todo[]) => void> = new Set();
 const tabListeners: Set<(tab: string) => void> = new Set();
+let isLoaded = false;
+
+async function saveToDoList(todos: Todo[]) {
+  try {
+    await AsyncStorage.setItem("@todoList", JSON.stringify(todos));
+    console.log("Tâches sauvegardées:", todos.length);
+  } catch (error) {
+    console.error("Erreur lors de la sauvegarde:", error);
+  }
+}
+
+async function loadToDoList() {
+  try {
+    const stringifiedTodoList = await AsyncStorage.getItem("@todoList");
+    if (stringifiedTodoList !== null) {
+      const parsedTodoList = JSON.parse(stringifiedTodoList);
+      console.log("Tâches chargées:", parsedTodoList.length);
+      return parsedTodoList;
+    }
+  } catch (error) {
+    console.error("Erreur lors du chargement:", error);
+  }
+  return [];
+}
 
 export function useTodoList() {
   const [todoList, setTodoList] = useState(globalTodoList);
 
-  // S'abonner aux changements
+  useEffect(() => {
+    async function loadData() {
+      if (!isLoaded) {
+        isLoaded = true;
+        const loadedTodos = await loadToDoList();
+        if (loadedTodos.length > 0) {
+          globalTodoList = loadedTodos;
+          setTodoList(loadedTodos);
+          todoListeners.forEach((listener) => listener(loadedTodos));
+        }
+      }
+    }
+    
+    loadData();
+  }, []);
+
   useEffect(() => {
     const listener = (newTodos: Todo[]) => {
       setTodoList(newTodos);
@@ -22,9 +61,12 @@ export function useTodoList() {
     };
   }, []);
 
+  // Fonction pour mettre à jour la liste
   const updateTodoList = (newTodos: Todo[]) => {
     globalTodoList = newTodos;
+    setTodoList(newTodos);
     todoListeners.forEach((listener) => listener(newTodos));
+    saveToDoList(newTodos);
   };
 
   return { todoList, setTodoList: updateTodoList };
@@ -33,7 +75,6 @@ export function useTodoList() {
 export function useSelectedTab() {
   const [selectedTabName, setSelectedTabName] = useState(globalSelectedTabName);
 
-  // S'abonner aux changements
   useEffect(() => {
     const listener = (newTab: string) => {
       setSelectedTabName(newTab);
@@ -53,8 +94,10 @@ export function useSelectedTab() {
   return { selectedTabName, setSelectedTabName: updateSelectedTabName };
 }
 
-// Fonction utilitaire pour filtrer les todos
-export function getFilteredList(todoList: Todo[], selectedTabName: string): Todo[] {
+export function getFilteredList(
+  todoList: Todo[],
+  selectedTabName: string,
+): Todo[] {
   switch (selectedTabName) {
     case "All":
       return todoList;
