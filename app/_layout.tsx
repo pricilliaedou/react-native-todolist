@@ -65,7 +65,6 @@ export default function RootLayout() {
           label="Créer"
           onPress={addTodo}
         />
-        <Dialog.Button label="Annuler" onPress={() => {}} />
       </Dialog.Container>
     </>
   );

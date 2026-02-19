@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     marginVertical: 10,
-    height: 115,
+    height: 90,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
